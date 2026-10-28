@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090d24">
+<title>The Million Point Drop — Classroom Edition</title>
+<style>
+:root{--bg:#080b1e;--panel:#111735;--panel2:#182149;--line:#33416e;--text:#f4f6ff;--muted:#aab4d8;--gold:#ffd166;--cyan:#5de4ff;--pink:#ff5ea8;--green:#58e0a0;--red:#ff657a}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(ellipse at top,#1a2250 0,#080b1e 58%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+button,input,textarea,select{font:inherit} button{cursor:pointer;border:1px solid var(--line);border-radius:12px;padding:10px 14px;color:var(--text);background:#202b58;font-weight:750;transition:.15s}button:hover{filter:brightness(1.15);transform:translateY(-1px)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+button.primary{background:linear-gradient(120deg,#087fba,#4b45bc);border-color:#6d9bff}button.gold{background:linear-gradient(120deg,#a85c0a,#e2a82e);color:#180f00;border-color:#ffdc75}button.danger{background:#5b203c;border-color:#b94d76}button.good{background:#145641;border-color:#3cb78d}
+input,textarea,select{width:100%;background:#090f2b;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px}textarea{min-height:72px;resize:vertical}label{display:block;color:var(--muted);font-size:.88rem;margin:0 0 5px}.wrap{max-width:1450px;margin:auto;padding:18px}.topbar{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:16px}.brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,#ffca57,#ff5ea8);color:#1a1030;font-size:25px;font-weight:1000;box-shadow:0 0 30px #ff5ea833}.eyebrow{font-size:.72rem;letter-spacing:.2em;color:var(--cyan);font-weight:900}.brand h1{margin:2px 0 0;font-size:clamp(1.2rem,3vw,2rem);line-height:1.1}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.volume{display:flex;align-items:center;gap:8px;background:#111735;border:1px solid var(--line);padding:8px 10px;border-radius:12px;color:var(--muted);font-size:.85rem}.volume input{width:90px;padding:0}
+.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(290px,.85fr);gap:16px;align-items:start}.panel{background:linear-gradient(145deg,#141b3cdd,#0e1430f2);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 18px 55px #0004}.panel h2,.panel h3{margin:0 0 12px}.question-head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;gap:6px;border:1px solid #4e5e96;background:#1b2650;border-radius:99px;padding:6px 10px;font-size:.78rem;font-weight:800;color:#dbe5ff}.timer{font-size:clamp(1.6rem,5vw,3rem);font-weight:1000;color:var(--gold);font-variant-numeric:tabular-nums;text-shadow:0 0 20px #ffd16633}.qtext{font-size:clamp(1.2rem,3vw,2rem);font-weight:850;line-height:1.25;margin:20px 0}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.answer{min-height:92px;text-align:left;display:flex;gap:12px;align-items:flex-start;padding:14px;background:linear-gradient(135deg,#1c2a58,#171c3e);border:1px solid #44558a}.answer .letter{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#e9f3ff;color:#13204a;font-weight:1000}.answer.correct{border:2px solid var(--green);box-shadow:0 0 25px #58e0a022}.answer.wrong{opacity:.45}.answer .answer-text{font-weight:700}.hint{color:var(--muted);font-size:.88rem;line-height:1.45}.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.team-list{display:grid;gap:10px}.team{background:#0c1230;border:1px solid #2c3967;border-radius:15px;padding:13px}.team-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.team-name{font-size:1rem;font-weight:850}.balance{font-size:1.35rem;font-weight:1000;color:var(--gold);font-variant-numeric:tabular-nums}.alloc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}.alloc label{text-align:center;font-size:.75rem}.alloc input{text-align:center;padding:9px 4px;font-weight:850}.sumline{display:flex;justify-content:space-between;gap:8px;font-size:.82rem;margin-top:8px;color:var(--muted)}.sumline strong{color:var(--text)}.valid{color:var(--green)!important}.invalid{color:var(--red)!important}.section-title{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.section-title h2{margin:0}.small{font-size:.8rem;padding:7px 9px}.divider{height:1px;background:#2d3967;margin:15px 0}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{margin-bottom:12px}.question-editor{border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px;background:#0b112a}.question-editor summary{cursor:pointer;font-weight:800;margin-bottom:12px}.qeditanswers{display:grid;grid-template-columns:1fr 1fr;gap:8px}.qeditanswers label{margin-top:3px}.hidden{display:none!important}.status{padding:10px 12px;border-radius:12px;background:#0a2e2c;border:1px solid #1e6b60;color:#aaf7d8;font-size:.9rem;margin-top:12px}.warning{background:#3a1b2c;border-color:#853854;color:#ffd4e2}.final-score{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px;border-radius:12px;background:#101a3c;margin:8px 0}.rank{color:var(--gold);font-weight:1000;font-size:1.1rem}.foot{text-align:center;color:#8793bf;font-size:.75rem;padding:20px}
+.modalback{position:fixed;inset:0;background:#020413eF;z-index:20;display:grid;place-items:center;padding:18px}.modal{width:min(900px,100%);max-height:90vh;overflow:auto;background:#111735;border:1px solid #58689f;border-radius:20px;padding:20px}.modal h2{margin-top:0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#edf4ff;color:#101833;padding:12px 18px;border-radius:12px;font-weight:800;z-index:30;box-shadow:0 10px 40px #0008;max-width:90vw}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.wrap{padding:10px}.panel{padding:14px}.answers{gap:8px}.answer{padding:10px;min-height:82px}.alloc{gap:5px}.alloc input{font-size:.9rem}.settings-grid{grid-template-columns:1fr}}
+@media(max-width:430px){.answers{grid-template-columns:1fr}.answer{min-height:60px}.alloc{grid-template-columns:repeat(4,minmax(0,1fr))}.topbar{align-items:flex-start}.volume input{width:65px}}
+@media print{body{background:white;color:black}.actions,.controls,.alloc input,button{display:none!important}.panel,.team{background:white;color:black;box-shadow:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><div class="logo">↓</div><div><div class="eyebrow">CLASSROOM QUIZ SHOW</div><h1>THE MILLION <span style="color:var(--gold)">POINT DROP</span></h1></div></div>
+    <div class="actions">
+      <button id="soundBtn" title="Mute/unmute sounds">🔊 Sound On</button>
+      <label class="volume">Volume <input id="volume" type="range" min="0" max="100" value="55"></label>
+      <button id="editBtn">✎ Edit Questions</button>
+      <button id="fullscreenBtn">⛶ Fullscreen</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="panel">
+      <div class="question-head">
+        <span class="pill" id="qCounter">QUESTION 1 / 10</span>
+        <div class="timer" id="timer">00:30</div>
+      </div>
+      <div class="qtext" id="questionText">Welcome to The Million Point Drop!</div>
+      <div class="hint" id="questionHint">Press Start Game, then enter your questions in Edit Questions.</div>
+      <div class="answers" id="answerGrid"></div>
+      <div class="controls">
+        <button class="gold" id="startBtn">▶ Start Game</button>
+        <button id="timerBtn">⏱ Start Timer</button>
+        <button class="primary" id="lockBtn">🔒 Lock Allocations</button>
+        <button class="good" id="revealBtn">✦ Reveal Answer</button>
+        <button id="nextBtn">Next Question →</button>
+      </div>
+      <div id="roundStatus" class="status">Ready when you are. Add your questions, then start the game.</div>
+    </main>
+
+    <aside class="panel">
+      <div class="section-title"><h2>Team Point Drops</h2><button class="small" id="addTeamBtn">＋ Add Team</button></div>
+      <p class="hint">Enter how many points each team places on A, B, C, and D. Every available point must be allocated before you lock the round.</p>
+      <div class="team-list" id="teamList"></div>
+      <div class="divider"></div>
+      <div class="section-title"><h3>Host Controls</h3><button class="small" id="scoresBtn">🏆 Scores</button></div>
+      <div class="settings-grid">
+        <div class="field"><label for="timerLength">Timer (seconds)</label><input id="timerLength" type="number" min="5" max="300" value="30"></div>
+        <div class="field"><label for="startPoints">Starting points (new game)</label><input id="startPoints" type="number" min="1" max="9999" value="50"></div>
+      </div>
+      <div class="controls">
+        <button id="pauseBtn">Ⅱ Pause Timer</button>
+        <button class="danger" id="restartBtn">↻ Restart Game</button>
+      </div>
+      <p class="hint">Tip: Press F11 or use Fullscreen for the projector. Browser audio starts after you interact with the page.</p>
+    </aside>
+  </div>
+
+  <section class="panel" style="margin-top:16px">
+    <div class="section-title"><h2>Round Progress</h2><span class="pill" id="progressPill">0 of 10 completed</span></div>
+    <div id="progressScores" class="hint">Scores will appear here as rounds are completed.</div>
+  </section>
+  <div class="foot">Classroom edition • Virtual points only • Customize your questions before playing</div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+<script>
+(() => {
+const LETTERS = ["A","B","C","D"];
+const defaultQuestions = Array.from({length:10},(_,i)=>({
+  question: i===0 ? "Welcome! Replace this with your first reported-topic question." : `Enter your Question ${i+1} here.`,
+  answers: ["Enter answer A","Enter answer B","Enter answer C","Enter answer D"],
+  correct: 0,
+  explanation: ""
+}));
+let questions = loadQuestions();
+let teams = [{id:1,name:"Team A",balance:50,alloc:[0,0,0,0]},{id:2,name:"Team B",balance:50,alloc:[0,0,0,0]},{id:3,name:"Team C",balance:50,alloc:[0,0,0,0]}];
+let nextTeamId=4, qIndex=0, started=false, locked=false, revealed=false, finished=false;
+let muted=false, volume=.55, timerRemaining=30, timerHandle=null, audioCtx=null;
+const $ = id => document.getElementById(id);
+function loadQuestions(){try{const x=JSON.parse(localStorage.getItem("mpd_questions")||"null");return Array.isArray(x)&&x.length===10?x:defaultQuestions;}catch{return defaultQuestions;}}
+function saveQuestions(){localStorage.setItem("mpd_questions",JSON.stringify(questions));}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function toast(msg){$("toastRoot").innerHTML=`<div class="toast">${esc(msg)}</div>`;setTimeout(()=>$("toastRoot").innerHTML="",2600);}
+function tone(freq=440,duration=.12,type="sine",gain=.18){if(muted||volume<=0)return;try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==="suspended")audioCtx.resume();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(Math.max(.001,gain*volume),audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+duration);}catch{}}
+function sound(name){if(name==="start"){[440,660,880].forEach((f,i)=>setTimeout(()=>tone(f,.18,"triangle"),i*110));}else if(name==="tick")tone(720,.045,"square",.08);else if(name==="correct"){[523,659,784,1046].forEach((f,i)=>setTimeout(()=>tone(f,.2,"triangle"),i*100));}else if(name==="wrong"){tone(180,.35,"sawtooth",.2);setTimeout(()=>tone(130,.35,"sawtooth",.16),170);}else if(name==="reveal"){[392,494,587,784].forEach((f,i)=>setTimeout(()=>tone(f,.25,"triangle"),i*90));}else if(name==="drop"){tone(500,.12,"sawtooth",.14);setTimeout(()=>tone(260,.18,"sawtooth",.12),90);}else if(name==="win"){[523,659,784,1046,1318].forEach((f,i)=>setTimeout(()=>tone(f,.3,"triangle"),i*120));}}
+function fmt(n){return Math.max(0,Math.floor(n)).toLocaleString();}
+function stopTimer(){if(timerHandle){clearInterval(timerHandle);timerHandle=null;}}
+function resetTimer(){stopTimer();timerRemaining=Math.max(5,Math.min(300,Number($("timerLength").value)||30));renderTimer();}
+function renderTimer(){$("timer").textContent=`${String(Math.floor(timerRemaining/60)).padStart(2,"0")}:${String(timerRemaining%60).padStart(2,"0")}`;$("timer").style.color=timerRemaining<=10?"var(--red)":"var(--gold)";}
+function startTimer(){if(locked||finished)return;if(timerHandle){return;}if(!started){started=true;renderQuestion();}timerHandle=setInterval(()=>{timerRemaining--;renderTimer();if(timerRemaining<=10&&timerRemaining>0)sound("tick");if(timerRemaining<=0){stopTimer();sound("wrong");$("roundStatus").textContent="⏰ Time is up! Lock the teams' allocations, then reveal the answer.";toast("Time is up!");}},1000);}
+function renderQuestion(){
+ const q=questions[qIndex];$("qCounter").textContent=finished?"GAME COMPLETE":`QUESTION ${qIndex+1} / ${questions.length}`;
+ $("questionText").textContent=finished?"The Drop Is Complete!":q.question;
+ $("questionHint").textContent=finished?"View the final scores below.":(q.explanation&&revealed?q.explanation:"Teams: allocate all remaining points across the four answer choices.");
+ $("answerGrid").innerHTML=finished?"":q.answers.map((a,i)=>`<div class="answer ${revealed?(i===Number(q.correct)?"correct":"wrong"):""}"><div class="letter">${LETTERS[i]}</div><div class="answer-text">${esc(a||`Answer ${LETTERS[i]}`)}${revealed&&i===Number(q.correct)?'<div style="color:var(--green);margin-top:8px">✓ CORRECT ANSWER</div>':""}</div></div>`).join("");
+ $("startBtn").textContent=started?"▶ Game Started":"▶ Start Game";
+ $("lockBtn").disabled=locked||finished;$("revealBtn").disabled=revealed||finished;$("nextBtn").disabled=!revealed||finished;
+ $("timerBtn").disabled=locked||finished;
+ renderTeams();renderProgress();
+}
+function renderTeams(){
+ $("teamList").innerHTML=teams.map(t=>{
+ const total=t.alloc.reduce((a,b)=>a+(Number(b)||0),0),valid=total===t.balance;
+ const inputs=LETTERS.map((l,i)=>`<div><label>${l}</label><input aria-label="${esc(t.name)} points on ${l}" type="number" min="0" max="${t.balance}" step="1" value="${t.alloc[i]}" data-team="${t.id}" data-answer="${i}" ${locked||revealed||finished?"disabled":""}></div>`).join("");
+ return `<div class="team"><div class="team-top"><div><div class="team-name">${esc(t.name)}</div><button class="small" data-rename="${t.id}" ${locked||revealed||finished?"disabled":""}>✎ Rename</button> <button class="small danger" data-remove="${t.id}" ${teams.length<=3||locked||revealed||finished?"disabled":""}>Remove</button></div><div class="balance">${fmt(t.balance)} pts</div></div><div class="alloc">${inputs}</div><div class="sumline"><span>Allocated: <strong>${fmt(total)} / ${fmt(t.balance)}</strong></span><strong class="${valid?'valid':'invalid'}">${valid?"✓ Balanced":`Need ${fmt(t.balance-total)} more`}</strong></div></div>`;
+ }).join("");
+ $("teamList").querySelectorAll("input[data-team]").forEach(inp=>inp.addEventListener("change",e=>{
+   const t=teams.find(x=>x.id===Number(e.target.dataset.team));if(!t)return;
+   const idx=Number(e.target.dataset.answer),v=Math.max(0,Math.min(t.balance,Math.floor(Number(e.target.value)||0)));
+   t.alloc[idx]=v;renderTeams();
+ }));
+ $("teamList").querySelectorAll("[data-rename]").forEach(b=>b.addEventListener("click",()=>{const t=teams.find(x=>x.id===Number(b.dataset.rename));const n=prompt("Enter team name:",t.name);if(n&&n.trim()){t.name=n.trim().slice(0,32);renderTeams();renderProgress();}}));
+ $("teamList").querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{if(teams.length<=3)return;const t=teams.find(x=>x.id===Number(b.dataset.remove));if(confirm(`Remove ${t.name}?`)){teams=teams.filter(x=>x.id!==t.id);renderTeams();renderProgress();}}));
+}
+function renderProgress(){
+ $("progressPill").textContent=`${finished?10:qIndex+(revealed?1:0)} of 10 completed`;
+ if(!teams.length){$("progressScores").textContent="No teams";return;}
+ $("progressScores").innerHTML=teams.slice().sort((a,b)=>b.balance-a.balance).map((t,i)=>`<div class="final-score"><span><span class="rank">#${i+1}</span> &nbsp;${esc(t.name)}</span><strong>${fmt(t.balance)} points</strong></div>`).join("");
+}
+function validAllocations(){return teams.every(t=>t.alloc.reduce((a,b)=>a+Number(b||0),0)===t.balance);}
+function lockRound(){
+ if(!started){started=true;renderQuestion();}
+ if(locked||finished)return;
+ if(!validAllocations()){toast("Every team must allocate all remaining points.");$("roundStatus").className="status warning";$("roundStatus").textContent="Not ready: each team's A+B+C+D allocation must exactly equal its current balance.";return;}
+ locked=true;stopTimer();$("roundStatus").className="status";$("roundStatus").textContent="Allocations locked! Reveal the correct answer when you're ready.";sound("drop");renderQuestion();
+}
+function reveal(){
+ if(!locked){toast("Lock all team allocations first.");return;}if(revealed)return;
+ revealed=true;const correct=Number(questions[qIndex].correct);
+ teams.forEach(t=>{const lost=t.alloc.reduce((sum,v,i)=>sum+(i===correct?0:Number(v||0)),0);t.balance=Math.max(0,t.balance-lost);});
+ sound("reveal");setTimeout(()=>sound("correct"),300);
+ const q=questions[qIndex];$("roundStatus").className="status";$("roundStatus").textContent=`Correct answer: ${LETTERS[correct]}. ${q.explanation||""} Points on other answers have dropped!`;
+ renderQuestion();
+}
+function nextQuestion(){
+ if(!revealed||finished)return;
+ if(qIndex>=9){finished=true;stopTimer();$("roundStatus").className="status";$("roundStatus").textContent="🏆 All 10 questions completed! Final balances are your bonus points.";sound("win");renderQuestion();showScores();return;}
+ qIndex++;locked=false;revealed=false;teams.forEach(t=>t.alloc=[0,0,0,0]);resetTimer();$("roundStatus").className="status";$("roundStatus").textContent=`Question ${qIndex+1} is ready. Teams, place all your remaining points.`;renderQuestion();sound("start");
+}
+function newGame(){
+ if(!confirm("Restart the game? All current scores will reset."))return;
+ stopTimer();started=false;locked=false;revealed=false;finished=false;qIndex=0;
+ const start=Math.max(1,Math.floor(Number($("startPoints").value)||50));
+ teams.forEach(t=>{t.balance=start;t.alloc=[0,0,0,0];});resetTimer();
+ $("roundStatus").className="status";$("roundStatus").textContent=`New game ready! Every team starts with ${start} points.`;renderQuestion();sound("start");
+}
+function showScores(){
+ const sorted=teams.slice().sort((a,b)=>b.balance-a.balance);
+ $("modalRoot").innerHTML=`<div class="modalback" id="scoreBack"><div class="modal"><div class="section-title"><h2>🏆 ${finished?"Final Results":"Current Scores"}</h2><button id="closeModal">✕ Close</button></div><p class="hint">${finished?"These remaining points are each team's plus points.":"Current points remaining."}</p>${sorted.map((t,i)=>`<div class="final-score"><span><span class="rank">#${i+1}</span> &nbsp;${esc(t.name)}</span><strong style="font-size:1.2rem;color:var(--gold)">${fmt(t.balance)} points</strong></div>`).join("")}<div class="controls"><button class="primary" id="printScores">Print / Save PDF</button></div></div></div>`;
+ $("closeModal").onclick=()=>$("modalRoot").innerHTML="";
+ $("scoreBack").addEventListener("click",e=>{if(e.target.id==="scoreBack")$("modalRoot").innerHTML="";});
+ $("printScores").onclick=()=>window.print();
+}
+function editQuestions(){
+ const content=questions.map((q,i)=>`<details class="question-editor" ${i===qIndex?"open":""}><summary>Question ${i+1}</summary><div class="field"><label>Question text</label><textarea data-q="${i}" data-field="question">${esc(q.question)}</textarea></div><div class="qeditanswers">${q.answers.map((a,j)=>`<div><label>Answer ${LETTERS[j]}</label><input data-q="${i}" data-answer="${j}" value="${esc(a)}"></div>`).join("")}</div><div class="settings-grid" style="margin-top:10px"><div class="field"><label>Correct answer</label><select data-q="${i}" data-field="correct">${LETTERS.map((l,j)=>`<option value="${j}" ${Number(q.correct)===j?"selected":""}>${l}</option>`).join("")}</select></div><div class="field"><label>Explanation (optional)</label><input data-q="${i}" data-field="explanation" value="${esc(q.explanation||"")}"></div></div></details>`).join("");
+ $("modalRoot").innerHTML=`<div class="modalback"><div class="modal"><div class="section-title"><h2>✎ Edit Your 10 Questions</h2><button id="closeEdit">✕ Close</button></div><p class="hint">Enter your reported-topic questions, four answer choices, and the correct answer. Your questions are saved in this browser on this device.</p><div id="editorContent">${content}</div><div class="controls"><button class="primary" id="saveQuestions">Save Questions</button><button id="exportQuestions">Export Questions JSON</button><button id="importQuestions">Import Questions JSON</button><button class="danger" id="resetQuestions">Restore Blank Template</button><input id="importFile" type="file" accept=".json,application/json" class="hidden"></div><p class="hint">For safety, save/export your questions before clearing browser data or switching devices.</p></div></div>`;
+ $("closeEdit").onclick=()=>$("modalRoot").innerHTML="";
+ $("saveQuestions").onclick=()=>{
+  const copy=questions.map(q=>({...q,answers:[...q.answers]}));
+  $("editorContent").querySelectorAll("[data-q][data-field]").forEach(el=>{const i=Number(el.dataset.q),f=el.dataset.field;copy[i][f]=f==="correct"?Number(el.value):el.value;});
+  $("editorContent").querySelectorAll("[data-q][data-answer]").forEach(el=>copy[Number(el.dataset.q)].answers[Number(el.dataset.answer)]=el.value);
+  if(copy.some(q=>!q.question.trim()||q.answers.some(a=>!a.trim()))){alert("Please fill in every question and all four answer choices.");return;}
+  questions=copy;saveQuestions();$("modalRoot").innerHTML="";renderQuestion();toast("Questions saved in this browser.");sound("correct");
+ };
+ $("exportQuestions").onclick=()=>{const blob=new Blob([JSON.stringify(questions,null,2)],{type:"application/json"});downloadBlob(blob,"million-point-drop-questions.json");};
+ $("importQuestions").onclick=()=>$("importFile").click();
+ $("importFile").onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());if(!Array.isArray(data)||data.length!==10||data.some(q=>!q.question||!Array.isArray(q.answers)||q.answers.length!==4||!Number.isInteger(Number(q.correct))))throw Error();questions=data;saveQuestions();$("modalRoot").innerHTML="";renderQuestion();toast("Questions imported.");}catch{alert("That file doesn't look like a valid 10-question export.");}};
+ $("resetQuestions").onclick=()=>{if(confirm("Restore the blank 10-question template? This replaces saved questions.")){questions=defaultQuestions.map(q=>({...q,answers:[...q.answers]}));saveQuestions();$("modalRoot").innerHTML="";renderQuestion();}};
+}
+function downloadBlob(blob,name){const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url);}
+$("startBtn").onclick=()=>{if(!started){started=true;renderQuestion();sound("start");$("roundStatus").textContent="Game started! Teams, discuss and allocate your points.";toast("Let's play!");}else toast("The game has started.");};
+$("timerBtn").onclick=()=>{if(timerHandle){stopTimer();$("timerBtn").textContent="⏱ Start Timer";}else{startTimer();$("timerBtn").textContent="⏱ Timer Running";}};
+$("pauseBtn").onclick=()=>{if(timerHandle){stopTimer();$("pauseBtn").textContent="▶ Resume Timer";}else if(started&&!locked&&!revealed){startTimer();$("pauseBtn").textContent="Ⅱ Pause Timer";}};
+$("lockBtn").onclick=lockRound;$("revealBtn").onclick=reveal;$("nextBtn").onclick=nextQuestion;$("restartBtn").onclick=newGame;$("scoresBtn").onclick=showScores;$("editBtn").onclick=editQuestions;
+$("addTeamBtn").onclick=()=>{if(locked||revealed){toast("Add teams between rounds, before locking allocations.");return;}const name=prompt("New team name:",`Team ${String.fromCharCode(65+teams.length)}`);if(!name||!name.trim())return;teams.push({id:nextTeamId++,name:name.trim().slice(0,32),balance:Math.max(1,Math.floor(Number($("startPoints").value)||50)),alloc:[0,0,0,0]});renderTeams();renderProgress();};
+$("soundBtn").onclick=()=>{muted=!muted;$("soundBtn").textContent=muted?"🔇 Sound Off":"🔊 Sound On";if(!muted)sound("start");};
+$("volume").oninput=e=>{volume=Number(e.target.value)/100;};
+$("fullscreenBtn").onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen();}catch{toast("Fullscreen isn't available in this browser.");}};
+$("timerLength").onchange=()=>{if(!timerHandle)resetTimer();};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")$("modalRoot").innerHTML="";});
+resetTimer();renderQuestion();
+})();
+</script>
+</body>
+</html>
